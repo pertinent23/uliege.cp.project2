@@ -1,41 +1,53 @@
 #include "itineraireflamme.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
 
-typedef struct Node_t
+typedef struct Node_t Node;
+
+struct ItineraireFlame_t
+{
+    Region *departure, *arrival;
+    Node *head;
+};
+
+struct Node_t
 {
     Region *value;
     struct Node_t *next;
     struct Node_t *prev;
-} Node;
-
-
-struct ItineraireFlame_t{
-    Region *departure, *arrival;
-    Node *head;
 };
 
 static struct Node_t *new_node(Region *value)
 {
     assert(value != NULL);
-    struct Node_t *result = malloc(sizeof(struct Node_t *));
+    struct Node_t *result = malloc(sizeof(struct Node_t));
 
     if (result == NULL)
         return NULL;
     
     result->value = value;
+    result->next = NULL;
+    result->prev = NULL;
 
     return result;
 }
 
+static void destroy_node(struct Node_t *node)
+{
+    assert(node != NULL);
+    free(node);
+}
+
 static unsigned int in_list(struct Node_t *last, Region *value)
 {
-    if (last != NULL)
+    struct Node_t *head = last;
+    if (head != NULL)
     {
-        if (last->value == value)
+        if (head->value == value)
             return 1;
-        return in_list(last->prev, value);
+        return in_list(head->prev, value);
     }
     
     return 0;
@@ -50,7 +62,7 @@ struct ItineraireFlame_t *new_itineraireflame(Region *start, Region *end)
     if (start == end)
         return NULL;
 
-    struct ItineraireFlame_t *way = malloc(sizeof(struct ItineraireFlame_t *));
+    struct ItineraireFlame_t *way = malloc(sizeof(struct ItineraireFlame_t));
 
     if (way == NULL)
         return NULL;
@@ -87,7 +99,7 @@ unsigned int count_region(struct ItineraireFlame_t *way)
     assert(way != NULL);
 
     if(way->head == NULL)
-        return 0;
+        return 2;
     
     unsigned int counter = 2;
     
@@ -95,12 +107,15 @@ unsigned int count_region(struct ItineraireFlame_t *way)
 
     while (head != NULL)
     {
-        if (head->value != way->departure && head->value != way->arrival && !in_list(head, head->value))
-            counter++;
+        if (head->value != way->departure && head->value != way->arrival)
+        {
+            if (!in_list(head->prev, head->value))
+                counter++;
+        }
         head = head->next;
     }
 
-    return 0;
+    return counter;
 }
 
 unsigned int count_resident(struct ItineraireFlame_t *way)
@@ -108,20 +123,20 @@ unsigned int count_resident(struct ItineraireFlame_t *way)
     assert(way != NULL);
 
     if(way->head == NULL)
-        return 0;
+        return get_nb_people(way->departure) + get_nb_people(way->arrival);
     
-    unsigned int residents = 0;
+    unsigned int residents = get_nb_people(way->departure) + get_nb_people(way->arrival);
     
     Node *head = way->head;
 
     while (head != NULL)
     {
-        if (head->value != way->departure && head->value != way->arrival && !in_list(head, head->value))
+        if (head->value != way->departure && head->value != way->arrival && !in_list(head->prev, head->value))
             residents += get_nb_people(head->value);
         head = head->next;
     }
 
-    return 0;   
+    return residents;   
 }
 
 unsigned int add_region(struct ItineraireFlame_t *way, Region *region)
@@ -134,11 +149,9 @@ unsigned int add_region(struct ItineraireFlame_t *way, Region *region)
         return 0;
 
     if (way->head != NULL)
-    {
-        node->next = way->head;
         way->head->prev = node;
-    }
 
+    node->next = way->head;
     way->head = node;
 
     return 1;
@@ -148,29 +161,39 @@ void remove_region(struct ItineraireFlame_t *way, Region *region)
 {
     assert(way != NULL && region != NULL);
 
-    Node *tmp = NULL, *head = way->head;
+    Node *head = way->head;
+    Node *tmp = NULL;
 
-    while (head != NULL)
-    {   
-        if (head->value == region)
+    do
+    {
+        if (head != NULL)
         {
-            tmp = head;
+            if (head->value == region)
+            {
+                if(head->prev != NULL)
+                    head->prev->next = head->next;
 
-            if(head->prev)
-                head->prev->next = tmp->next;
-            
-            if(tmp->next)
-                tmp->next->prev = tmp->prev;
+                if(head->next != NULL)
+                    head->next->prev = head->prev;
+
+                tmp = head;
+            }
+
+            if(head->next != NULL)
+                head = head->next;
+
+            if (tmp != NULL)
+            {
+                destroy_node(tmp);
+                tmp = NULL;
+            }
         }
+    } while (head != NULL && head->next != NULL);
 
-        head = head->next;
-
-        if (tmp != NULL)
-        {
-            free(tmp);
-            tmp = NULL;
-        }
-    }
+    while (head != NULL && head->prev != NULL)
+        head = head->prev;
+    
+    way->head = head;
 }
 
 void destroy_itineraireflame(struct ItineraireFlame_t *way, unsigned int delete_regions)

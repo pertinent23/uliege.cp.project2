@@ -1,11 +1,13 @@
 #include "itineraireflamme.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
 
 #define ARRAY_SIZE 100
 
-struct ItineraireFlame_t{
+struct ItineraireFlame_t
+{
     Region *departure, *arrival;
     Region **map;
     int indicator;
@@ -18,12 +20,11 @@ struct ItineraireFlame_t *new_itineraireflame(Region *start, Region *end)
     if (start == end)
         return NULL;
 
-    struct ItineraireFlame_t *way = malloc(sizeof(struct ItineraireFlame_t *));
+    struct ItineraireFlame_t *way = malloc(sizeof(struct ItineraireFlame_t));
 
     if (way == NULL)
         return NULL;
 
-    way->map = NULL;
     way->map = malloc(sizeof(Region *) * ARRAY_SIZE);
 
     if (way->map == NULL)
@@ -148,8 +149,11 @@ void destroy_itineraireflame(struct ItineraireFlame_t *way, unsigned int delete_
 
     if (delete_regions)
     {
-        for (int i = 0; i < way->indicator; i++)
-            destroy_region(way->map[i]);
+        for (int i = 0; i < way->indicator; i++) 
+        {
+            if (way->map[i] != NULL)
+                destroy_region(way->map[i]);
+        }
 
         destroy_region(way->departure);
         destroy_region(way->arrival);

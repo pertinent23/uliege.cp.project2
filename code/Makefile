@@ -8,27 +8,23 @@
 
 # Tools & flags
 CC=gcc
-CFLAGS=--std=c99 --pedantic -Wall -W -Wmissing-prototypes -Wno-deprecated-declarations -lm
+CFLAGS=--std=c99 --pedantic -Wall -W -Wmissing-prototypes -lm
 LD=gcc
 LDFLAGS=-lm
 
-EXEC=tetris
-MODULES=tools.c piece_modele.c piece_controleur.c piece_vue.c modal_modele.c modal_vue.c modal_controleur.c app_modele.c app_vue.c app_controleur.c main.c
-OBJECTS=tools.o piece_modele.o piece_controleur.o piece_vue.o modal_modele.o modal_vue.o modal_controleur.o app_modele.o app_vue.o app_controleur.o main.o
+EXEC_LIST=itineraireflamme_liste_test
+EXEC_ARRAY=itineraireflamme_tableau_test
+OBJECTS=seatest.o region.o itineraireflamme_tableau.o itineraireflamme_liste.o itineraireflamme_tableau_test.o itineraireflamme_liste_test.o
 
-#GTK+
-GTK_FLAGS=pkg-config --cflags
-GTK_LIBS=pkg-config --libs
-GTK=gtk+-2.0
+test_array: seatest.o region.o itineraireflamme_tableau.o itineraireflamme_tableau_test.o
+	$(LD) $^ -o $(EXEC_ARRAY) $(LDFLAGS)
 
-.PHONY: tetris
-
-tetris: $(OBJECTS)
-	$(LD) `$(GTK_FLAGS) $(GTK)` $^ -o $(EXEC) $(LDFLAGS) `$(GTK_LIBS) $(GTK)`
+test_list: seatest.o region.o itineraireflamme_liste.o itineraireflamme_liste_test.o
+	$(LD) $^ -o $(EXEC_LIST) $(LDFLAGS)
 
 $(OBJECTS): %.o: %.c
-	$(CC) `$(GTK_FLAGS) $(GTK)` -o $@ -c $^ $(CFLAGS) `$(GTK_LIBS) $(GTK)`
+	$(CC) -o $@ -c $^ $(CFLAGS)
 
 clean: 
-	rm -f *.o $(EXEC) $(OUTPUT) tempCodeRunnerFile *~
+	rm -f *.o $(EXEC_ARRAY) $(EXEC_LIST) tempCodeRunnerFile *~
 	clear
