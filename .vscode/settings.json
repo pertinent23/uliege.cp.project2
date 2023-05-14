@@ -12,6 +12,12 @@
         "utility": "c",
         "istream": "c",
         "ostream": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "seatest.h": "c",
+        "stdio.h": "c",
+        "*.tcc": "c",
+        "string": "c",
+        "unordered_map": "c",
+        "string_view": "c"
     }
 }

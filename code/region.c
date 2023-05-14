@@ -4,6 +4,15 @@
 #include <assert.h>
 #include <math.h>
 
+/** @struct Region_t 
+ * 
+ * @param x
+ * @param y
+ * @param name
+ * @param speciality
+ * @param headquater
+ * @param nb_people
+*/
 struct Region_t{
     double x, y;
     char *name;
