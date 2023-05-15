@@ -65,3 +65,182 @@ $T(.) = \sum_{i=1}^{6} T_i$
 \end{itemize}
 
 Ainsi $T(.) = 6 \rightarrow T(.) \in O(1)$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Vérifier si un itineraireflame est un circuit}
+
+\raggedright
+
+\begin{lstlisting}
+unsigned int is_circuit(struct ItineraireFlame_t *way)
+{
+    assert(way != NULL);
+
+    //$T_1$
+    if (way->indicator == 0)
+        return 0;
+
+    //$T_2$
+    for (int i = 0; i < way->indicator; i++)
+    {
+        //$T_{2.1}$
+        if(way->map[i] == way->departure || way->map[i] == way->arrival)
+            return 1;
+
+        //$T_{2.2}$
+        for(int y=i-1; y>=0; y--)
+        {
+            //$T_{2.2.1}$
+            if(way->map[y] == way->map[i])
+                return 1;
+        }
+    }
+
+    //$T_3$
+    return 0;
+}
+\end{lstlisting}
+
+$T(.) = T_1 + T_2 + T_3$
+
+\begin{description}
+    \item[$T_1 = 1$] 
+    \item[$T_2 = (T_{2.1} + T_{2.2})*indicator$]
+    \indent
+    \begin{description}
+        \item[$T_{2.1} = 1$] 
+        \item[$T_{2.2} = y*T_{2.2.1}=indicator$] 
+    \end{description} 
+    \item[$T_3 = 1$] 
+\end{description}
+
+Ainsi:
+$T_2=(1 + indicator)*indicator \land 0 \le indicator \le ARRAY\_SIZE$
+\newline
+$T_2=ARRAY\_SIZE^2 + ARRAY\_SIZE$ 
+\newline
+$T(.) = ARRAY\_SIZE^2 + ARRAY\_SIZE + 2$
+
+Conclusion: $T(.) \in O(ARRAY\_SIZE^2)$
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Compter le nombre de region}
+
+\begin{lstlisting}
+unsigned int count_region(struct ItineraireFlame_t *way)
+{
+    assert(way != NULL);
+
+    Region *tmp[ARRAY_SIZE];
+    unsigned int is_counted, counter = 2;
+
+    tmp[0] = way->departure;
+    tmp[1] = way->arrival;
+
+    for (int i = 0; i < way->indicator; i++)
+    {
+        is_counted = 0;
+        for(int y = counter-1; y >= 0 && !is_counted; y--)
+            is_counted = (tmp[y] == way->map[i]);
+        
+        if(!is_counted)
+            tmp[counter++] = way->map[i];
+    }
+    
+    return counter;
+}
+\end{lstlisting}
+
+Par le même processus que celui de précédent on obtient: $T(.) \in O(ARRAY\_SIZE^2)$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Ajouter une région}
+
+\begin{lstlisting}
+unsigned int add_region(struct ItineraireFlame_t *way, Region *region)
+{
+    assert(way != NULL && region != NULL);
+    
+    //$T_1$
+    if (way->indicator >= ARRAY_SIZE)
+        return 0;
+
+    //$T_2$
+    way->map[way->indicator++] = region;
+
+    return 1;
+}
+\end{lstlisting}
+
+\raggedright
+$T(.) = T_1 + T_2 = 2$
+
+Conclusion: $T(.) \in O(1)$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Supprimer une région de l'itineraireflame}
+
+\begin{lstlisting}
+void remove_region(struct ItineraireFlame_t *way, Region *region)
+{
+    assert(way != NULL && region != NULL);
+
+    //$T_1$
+    int i = way->indicator;
+
+    //$T_2$
+    while (i >= 0)
+    {
+        //$T_{2.1}$
+        if (way->map[i] == region)
+        {
+            //$T_{2.1.1}$
+            for (int y = i+1; i < way->indicator; i++)
+                way->map[y-1] = way->map[y];
+            
+            //$T_{2.1.2}$
+            way->indicator--;
+        }
+
+        //$T_{2.2}$
+        i--;
+    }
+}
+\end{lstlisting}
+$T(.)=T_1 + T_2$
+
+\begin{description}
+    \item[$T_1 = 1$] 
+    \item[$T_2 = indicator*(T_{2.1} + T_{2.2})$]
+        \indent 
+        \begin{description}
+            \item[$T_{2.1} = T_{2.1.1} + T_{2.1.2}$]
+                \indent
+                \begin{description}
+                    \item[$T_{2.1.1} = indicator$] 
+                    \item[$T_{2.1.2} = 1$] 
+                \end{description}
+            \item[$T_{2.2} = 1$]
+        \end{description} 
+\end{description}
+
+Ainsi:
+\newline$\rightarrow T_{2.1} = indicator + 1 \land T_{2.2} = 1$
+\newline$\rightarrow T_2 = indicator*(indicator + 2)$ 
+\newline$\rightarrow T(.) = indicator^2 + indicator + 1 \land 0 \le indicator \le ARRAY\_SIZE$ 
+\newline$\rightarrow T(.) = ARRAY\_SIZE^2 + ARRAY\_SIZE + 1$
+
+Conclusion: $T(.) \in O(ARRAY\_SIZE^2)$
