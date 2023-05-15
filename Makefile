@@ -22,7 +22,8 @@ test_list:
 
 clean:
 	cd code && make clean
-	rm $(OUTPUT)
+	rm -f ./rapport/*.log ./rapport/*.fls ./rapport/*.aux ./rapport/*.toc ./rapport/*.fdb_latexmk ./rapport/*.gz
+	rm -f $(OUTPUT)
 	clear
 
 archive: clean

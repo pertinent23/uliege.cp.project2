@@ -1,0 +1,163 @@
+% !TEX root = ./main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Dans cette section, spécifiez formellement vos TADs (syntaxe et sémantique)            %
+% 1 sous-section/TAD                                                                     %
+% N'oubliez pas de justifier la complétude de vos TADs                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Spécifications Abstraites}\label{tad}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Nous avons principalement deux types abstraits de données:
+\begin{itemize}
+  \item Region
+  \item ItineraireFlame
+\end{itemize}
+
+\subsection{TAD Region}
+%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Syntaxe}
+%%%%%%%%%%%%%%%%%%%%%%%
+\begin{description}
+  \item[Type:]
+    \begin{description}
+      \item Region
+    \end{description}
+  \item[Utilise:]\indent
+    \begin{itemize}
+      \item Integer
+      \item String
+      \item Double
+    \end{itemize}
+  \item[Opérations:]\indent
+    \begin{itemize}
+      \item create: Double $\times$ Double $\times$ String $\to$ Region
+      \item get\_x: Region $\to$ Double
+      \item get\_y: Region $\to$ Double
+      \item get\_nb\_people: Region $\to$ Integer
+      \item get\_headquater: Region $\to$ String
+      \item get\_name: Region $\to$ String
+      \item get\_speciality: Region $\to$ String
+      \item distance: Region $\times$ Region $\to$ Double
+      \item set\_x: Region $\times$ Double $\to$ Region
+      \item set\_y: Region $\times$ Double $\to$ Region
+      \item set\_headquater: Region $\times$ String $\to$ Region
+      \item set\_speciality: Region $\times$ String $\to$ Region
+      \item set\_nb\_people: Region $\times$ Integer $\to$ Region
+      \item destroy: Region $\to$ $\emptyset$
+    \end{itemize}
+\end{description}
+
+\subsubsection{Sémantique}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{description}
+  \item[Préconditions:]\indent
+    \begin{description}
+      \item $\forall j \in$ Integer, $\forall k\in$ Region
+      \item $\forall j \geq 0$, set\_nb\_people(k, j)
+    \end{description}
+  \item[Axiomes:]\indent
+    \begin{description}
+      \item $\forall r \in$ Region, $\forall i \in$ Double, $\forall j \in$ Integer,  $\forall s \in$ String
+      \item $get\_x(set\_x(r, i)) = i$
+      \item $get\_y(set\_y(r, i)) = i$
+      \item $get\_speciality(set\_speciality(r, s)) = s$
+      \item $get\_headquater(set\_headquater(r, s)) = s$
+    \end{description}
+\end{description}
+
+\addvspace{50px}
+
+\begin{raggedleft}
+\begin{tabular}{ c|lccccc }
+                                &                          & \multicolumn{4}{c}{Opérations Internes} \\
+  \hline
+  \multirow{6}{*}{Observateurs} &                          & $create(\cdot)$ & $set\_x(\cdot)$ & $set\_y(\cdot)$ & $set\_headquater(\cdot)$ \\
+                                & $get\_x(\cdot)$          & \checkmark      & \checkmark      & \checkmark      & \checkmark               \\
+                                & $get\_y(\cdot)$          & \checkmark      & \checkmark      & \checkmark      & \checkmark               \\
+                                & $get\_headquater(\cdot)$ & \checkmark      & \checkmark      & \checkmark      & \checkmark               \\
+                                & $get\_name(\cdot)$       & \checkmark      & \checkmark      & \checkmark      & \checkmark               \\
+                                & $get\_speciality(\cdot)$ & \checkmark      & \checkmark      & \checkmark      & \checkmark               \\
+\end{tabular}
+\end{raggedleft}
+
+\addvspace{50px}
+
+\begin{raggedleft}
+\begin{tabular}{ c|lccccc }
+                                &                          & \multicolumn{2}{c}{Opérations Internes} \\
+  \hline
+  \multirow{6}{*}{Observateurs} &                          & $set\_nb\_people(\cdot)$ & $set\_speciality(\cdot)$ & $destroy(\cdot)$ \\
+                                & $get\_x(\cdot)$          & \checkmark               & \checkmark               & $\emptyset$      \\
+                                & $get\_y(\cdot)$          & \checkmark               & \checkmark               & $\emptyset$      \\
+                                & $get\_headquater(\cdot)$ & \checkmark               & \checkmark               & $\emptyset$      \\
+                                & $get\_name(\cdot)$       & \checkmark               & \checkmark               & $\emptyset$      \\
+                                & $get\_speciality(\cdot)$ & \checkmark               & \checkmark               & $\emptyset$      \\
+\end{tabular}
+\end{raggedleft}
+
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{TAD ItineraireFlame}
+
+\subsubsection{Syntaxe}
+
+\begin{description}
+  \item[Type:]
+    \begin{description}
+      \item ItineraireFlame
+    \end{description}
+  \item[Utilise:]\indent
+    \begin{itemize}
+      \item Region
+      \item Boolean
+      \item Integer
+    \end{itemize}
+  \item[Opérations:]\indent
+    \begin{itemize}
+      \item create: Region $\times$ Region $\to$ ItineraireFlame
+      \item is\_circuit: ItineraireFlame $\to$ Boolean
+      \item count\_region: ItineraireFlame $\to$ Integer
+      \item count\_people: ItineraireFlame $\to$ Integer
+      \item add\_region: ItineraireFlame $\times$ Region $\to$ ItineraireFlame
+      \item remove\_region: ItineraireFlame $\times$ Region $\to$ ItineraireFlame
+      \item destroy: ItineraireFlame $\to$ $\emptyset$
+    \end{itemize}
+\end{description}
+
+\subsubsection{Sémantique}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{description}
+  \item[Préconditions:]\indent
+    \begin{description}
+      \item $\forall i, j \in$ Region
+      \item $\forall i, j$, create(i, j)
+    \end{description}
+  \item[Axiomes:]\indent
+    \begin{description}
+      \item $\forall r_0, r \in$ Region, $\forall j \in$ Integer, $\forall k \in$ ItineraireFlame
+      \item $count\_region(add\_region(k, r)) = count\_region(k)+1$
+      \item $is\_circuit(add\_region(create(r_0, r), r)) = True$
+      \item $is\_circuit(add\_region(create(r_0, r), r_0)) = True$
+      \item $is\_circuit(create(r_0, r)) = False$
+    \end{description}
+\end{description}
+
+\begin{center}
+\begin{tabular}{ c|lcccc }
+                              & \multicolumn{5}{c}{Opérations Internes} \\
+\hline
+\multirow{4}{*}{Observateurs} &                           & $create(\cdot)$ & $add\_region(\cdot)$ & $remove\_region(\cdot)$ & $destroy(\cdot)$  \\
+                              & $is\_circuit(\cdot)$      & \checkmark      & \checkmark           & \checkmark              & $\emptyset$       \\
+                              & $count\_region(\cdot)$    & \checkmark      & \checkmark           & \checkmark              & $\emptyset$       \\
+                              & $count\_people(\cdot)$    & \checkmark      & \checkmark           & \checkmark              & $\emptyset$       \\
+\end{tabular}
+\end{center}
+
+
+\pagebreak
