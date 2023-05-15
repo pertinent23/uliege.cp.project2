@@ -6,3 +6,25 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Tests Unitaires}\label{tests}
 %%%%%%%%%%%%%%%%%%%%%%%%%
+Comme il y'a deux implémentations du module "itineraireflame.h", les tests unitaires ont étés
+divisés en deux parties:
+\begin{itemize}
+    \item Les tests de l'implémentations avec les listes
+    \item Les tests de l'implémentations avec les tableaux
+\end{itemize}
+Chacun de ces tests commencent par des tests sur le module "region.h", notaments:
+\begin{itemize}
+    \item La creation d'une region
+    \item Les tests des Accésseurs
+    \item Les tests des Mutateurs
+\end{itemize}
+Puis on fait des tests de calculs de distance entre les régions.
+
+Une fois, les tests sur le module "region.h" terminés, on commencent les tests sur accésseurs basics 
+du type ItineraireFlame, c'est à dire:
+\begin{itemize}
+    \item get\_coord\_x
+    \item get\_coord\_y
+    \item get\_region\_name
+\end{itemize}
+Ces tests passés, on test l'ajout et la suppréssion des regions et le comptage des regions.

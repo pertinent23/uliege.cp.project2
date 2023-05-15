@@ -6,7 +6,7 @@ typedef struct Region_t Region;
 
 /**
  * @brief 
- * Cette fonction va creer et retourner une nouvel 
+ * Cette fonction va creer et retourner un nouvel 
  * objet Region
  * 
  * @param x 
@@ -143,7 +143,7 @@ void set_region_speciality(struct Region_t *region, char *speciality);
  * @brief 
  * 
  * @pre region != NULL
- * @post l'espace mémoire de region a été libéré
+ * @post l'espace mémoire de region a été libéré 
  * 
  * @param region 
 */

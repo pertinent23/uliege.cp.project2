@@ -9,4 +9,113 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Invariants}\label{invariants}
 %%%%%%%%%%%%%%%%%%%%
-Pour inclure vos Invariants Graphique dans le rapport, nous vous rappelons que l'outil \textsc{Glide} (\url{https://cafe.uliege.be}) permet d'exporter au format PDF vos dessins d'Invariants.
+
+\begin{itemize}
+
+\item[]
+\begin{itemize}
+    \item[]$In(a, b)$: Permet de vérifier si b est dans a
+        \indent
+        \begin{description}
+            \item a: Est un tableau de Region de taille ARRAY\_SIZE
+            \item b: b est de type Region
+        \end{description} 
+    \item[]$CountRegion(map)$: Compte le nombre de region différentes dans map
+        \indent
+        \begin{description}
+            \item map: Est un tableau de Region de taille ARRAY\_SIZE
+        \end{description} 
+    \item[]$CountHabitant(map)$: Compte le nombre d'habitant des regions différentes de map
+        \indent
+        \begin{description}
+            \item map: Est un tableau de Region de taille ARRAY\_SIZE
+        \end{description} 
+\end{itemize}
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Recherche d'une region sur l'itinéraire: $search(map, region)$}
+
+\begin{itemize}
+    \item region: de type Region
+    \item map[0, indicator]: est un tableau de region
+\end{itemize}
+
+\subsubsection{Invariant Graphique}
+
+\addvspace{40px}
+\begin{center}
+    \includegraphics[scale=0.5]{search-region.png}
+\end{center}
+\addvspace{40px}
+
+\subsubsection{Invariant Formel}
+
+INV $\equiv$ $map=map_0 \land -1 \le i < indicator$
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Compter le nombre de region sur l'itinéraire: $count\_region(map)$}
+
+\begin{itemize}
+    \item map[0, indicator]: est un tableau de region
+\end{itemize}
+
+\subsubsection{Invariant Graphique}
+
+\addvspace{40px}
+\begin{center}
+    \includegraphics[scale=0.5]{count-region.png}
+\end{center}
+\addvspace{40px}
+
+\subsubsection{Invariant Formel}
+
+INV $\equiv$ $map=map_0 \land 0 \le i \le indicator \land compteur=CountRegion(map[0, i])$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Compter le nombre d'habitant de l'itinéraire: $count\_resident(map)$}
+
+\subsubsection{Invariant Graphique}
+
+\addvspace{40px}
+\begin{center}
+    \includegraphics[scale=0.5]{count-habitant}
+\end{center}
+\addvspace{40px}
+
+\subsubsection{Invariant Formel}
+
+INV $\equiv$ $map=map_0 \land 0 \le i \le indicator \land compteur=CountHabitant(map[0, i])$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Vérifier si un itinéraire est un circuit: $is\_circuit(map)$}
+
+\subsubsection{Invariant Graphique}
+
+\addvspace{40px}
+\begin{center}
+    \includegraphics[scale=0.5]{is_circuit.png}
+\end{center}
+\addvspace{40px}
+
+\subsubsection{Invariant Formel}
+
+INV $\equiv$ $map=map_0 \land 0 \le i \le indicator \land is\_circuit=In(map[0, i-1], map[i])$

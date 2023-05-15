@@ -5,3 +5,63 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Complexité}\label{complexite}
 %%%%%%%%%%%%%%%%%%%%
+
+\quad Le projet est divisé en deux partie, Region et ItineraireFlame.
+
+\subsection{Partie Region:}
+
+Dans cette partie nous n'avons que des accésseurs et des mutateurs, ainsi, ils fonctionnent
+en $O(1)$ sur les champs de la structure car aucun tableau ou liste est utilisé.
+
+\subsection{Partie ItineraireFlame:}
+
+\subsubsection{Create}
+
+\begin{lstlisting}
+struct ItineraireFlame_t *new_itineraireflame(Region *start, Region *end)
+{
+    assert(start != NULL && end != NULL);
+
+    //$T_1$
+    if (start == end)
+        return NULL;
+
+    //$T_2$
+    struct ItineraireFlame_t *way = malloc(sizeof(struct ItineraireFlame_t));
+
+    //$T_3$
+    if (way == NULL)
+        return NULL;
+
+    //$T_4$
+    way->map = malloc(sizeof(Region *) * ARRAY_SIZE);
+
+    //$T_5$
+    if (way->map == NULL)
+    {
+        free(way);
+        return NULL;
+    }
+
+    //$T_6$
+    way->departure = start;
+    way->arrival = end;
+    way->indicator = 0;
+    
+    return way;
+}
+\end{lstlisting}
+
+La complexité ici est égale à la somme de $T_1$ à $T_6$
+
+$T(.) = \sum_{i=1}^{6} T_i$
+
+\begin{itemize}
+    \item $T_1 = 1$
+    \item $T_2 = 1$
+    \item $T_3 = 1$
+    \item $T_5 = 1$
+    \item $T_6 = 1$
+\end{itemize}
+
+Ainsi $T(.) = 6 \rightarrow T(.) \in O(1)$

@@ -4,3 +4,396 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Specifications}\label{specifications}
 %%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Specifications Region:}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Création d'un objet Region}
+
+\begin{itemize}
+    \item @Pre: $name \in String \land name \ne \emptyset$
+    \item @Post: $new\_region = x \land x \in Region$ 
+\end{itemize}
+
+\begin{lstlisting}
+/**
+ * @brief 
+ * Cette fonction va creer et retourner un nouvel 
+ * objet Region
+*/
+struct Region_t *new_region(double x, double y, char *name);
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Coordonné X}
+
+\begin{itemize}
+    \item @Pre: $region \ne NULL$
+    \item @Post: $get\_coord\_x \in \Re$ 
+\end{itemize}
+
+\begin{lstlisting}
+/**
+    * @brief 
+    * retourne la coordonné x de l'objet Region
+*/
+double get_coord_x(struct Region_t *region);
+\end{lstlisting}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Coordonné Y}
+
+\begin{itemize}
+    \item @Pre: $region \ne NULL$
+    \item @Post: $get\_coord\_y \in \Re$ 
+\end{itemize}
+
+\begin{lstlisting}
+/**
+    * @brief 
+    * retourne la coordonné y de l'objet Region
+*/
+double get_coord_y(struct Region_t *region);
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Nom de la Region}
+
+\begin{itemize}
+    \item @Pre: $region \ne NULL$
+    \item @Post: $get\_region\_name \in String$ 
+\end{itemize}
+
+\begin{lstlisting}
+/**
+    * @brief 
+    * retourne le nom de la Region
+*/
+char *get_region_name(struct Region_t *region);
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Chef Lieu de la region}
+
+\subsubsection{Accésseur}
+
+\begin{itemize}
+    \item @Pre: $region \ne NULL$
+    \item @Post: $get\_region\_headquater \in String$ 
+\end{itemize}
+
+\begin{lstlisting}
+/**
+    * @brief 
+    * retourne le chef lieu de la Region
+*/
+char *get_region_headquater(struct Region_t *region);
+\end{lstlisting}
+
+\subsubsection{Mutateur}
+
+\begin{itemize}
+    \item @Pre: $region \ne NULL \land headquater \ne NULL$
+    \item @Post: $\slash$
+\end{itemize}
+
+\begin{lstlisting}
+/**
+    * @brief 
+    * modifie le chef lieu d'une region
+*/
+void set_region_headquater(struct Region_t *region, char *headquater);
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Spécialité de la region}
+
+\subsubsection{Accésseur}
+
+\begin{itemize}
+    \item @Pre: $region \ne NULL$
+    \item @Post: $get\_region\_speciality \in String$ 
+\end{itemize}
+
+\begin{lstlisting}
+/**
+    * @brief 
+    * retourne la spécialité de la Region
+*/
+char *get_region_speciality(struct Region_t *region);
+\end{lstlisting}
+
+\subsubsection{Mutateur}
+
+\begin{itemize}
+    \item @Pre: $region \ne NULL \land speciality \ne NULL$
+    \item @Post: $\slash$
+\end{itemize}
+
+\begin{lstlisting}
+/**
+    * @brief 
+    * Modifie la spécialité de la region
+*/
+void set_region_speciality(struct Region_t *region, char *speciality);
+\end{lstlisting} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Nombre d'habitant de la region}
+
+\subsubsection{Accésseur}
+
+\begin{itemize}
+    \item @Pre: $region \ne NULL$
+    \item @Post: $get\_nb\_people \ge 0$ 
+\end{itemize}
+
+\begin{lstlisting}
+/**
+    * @brief 
+    * retourne le nombre d'habitant d'un region
+*/
+unsigned int get_nb_people(struct Region_t *region);
+\end{lstlisting}
+
+\subsubsection{Mutateur}
+
+\begin{itemize}
+    \item @Pre: $region \ne NULL \land nb\_people \ge 0$
+    \item @Post: $\slash$
+\end{itemize}
+
+\begin{lstlisting}
+/**
+    * @brief 
+    * Modifie le nombre d'habitant de la region
+*/
+void set_nb_people(struct Region_t *region, unsigned int nb_people);
+\end{lstlisting} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Distance entre deux region}
+
+\begin{itemize}
+    \item @Pre: $region\_1 \ne NULL \land region\_2 \ne NULL$
+    \item @Post: $distance\_between\_region \in \Re$ 
+\end{itemize}
+
+\begin{lstlisting}
+/**
+    * @brief 
+    * retourne la distance entre region_1 et region_2
+*/
+double distance_between_region(Region *region_1, Region *region_2);
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Destruction de l'objet region}
+
+\begin{itemize}
+    \item @Pre: $region \ne NULL$
+    \item @Post: $\slash$ 
+\end{itemize}
+
+\begin{lstlisting}
+/**
+    * @brief 
+    * libère l'espace mémoire prévu pour region
+*/
+void destroy_region(struct Region_t *region);
+\end{lstlisting}
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Specifications ItineraireFlame:}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Création de l'objet ItineraireFlame\_t}
+
+\begin{itemize}
+    \item @Pre: $start \ne NULL \land end \ne NULL$
+    \item @Post: $new\_itineraireflame \in struct ItineraireFlame\_t$ 
+\end{itemize}
+
+\begin{lstlisting}
+/**
+    * @brief 
+    * Crèe un objet de type ItineraireFlame_t
+*/
+struct ItineraireFlame_t *new_itineraireflame(Region *start, Region *end);
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Vérifier si un itinéraire est un circuit}
+
+\begin{itemize}
+    \item @Pre: $way \ne NULL$
+    \item @Post: $is\_circuit \in Boolean $ 
+\end{itemize}
+
+\begin{lstlisting}
+/**
+    * @brief 
+    * Vérifie si l'itinéraire est un circuit
+*/
+unsigned int is_circuit(struct ItineraireFlame_t *way);
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Compter le nombre de region}
+
+\begin{itemize}
+    \item @Pre: $way \ne NULL$
+    \item @Post: $count\_region \ge 0$ 
+\end{itemize}
+
+\begin{lstlisting}
+/**
+    * @brief 
+    * Retourne le nombre de regions différentes de l'itinéraire
+*/
+unsigned int count_region(struct ItineraireFlame_t *way); 
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Compter le nombre d'habitant de l'itinéraire}
+
+\begin{itemize}
+    \item @Pre: $way \ne NULL$
+    \item @Post: $count\_resident \ge 0$ 
+\end{itemize}
+
+\begin{lstlisting}
+/**
+    * @brief 
+    * Retourne le nombre d'habitant de l'itinéraire
+*/
+unsigned int count_resident(struct ItineraireFlame_t *way);  
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Ajouter une region sur un itinéraire}
+
+\begin{itemize}
+    \item @Pre: $way \ne NULL \land region \ne NULL$
+    \item @Post: $add\_region == 1 \land region \in way$ 
+\end{itemize}
+
+\begin{lstlisting}
+/**
+    * @brief 
+    * Ajoute une region sur un itinéraire
+*/
+unsigned int add_region(struct ItineraireFlame_t *way, Region *region); 
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Supprime une region d'un itinéraire}
+
+\begin{itemize}
+    \item @Pre: $way \ne NULL \land region \ne NULL$
+    \item @Post: $remove\_region == 1 \land region \notin way$ 
+\end{itemize}
+
+\begin{lstlisting}
+/**
+    * @brief 
+    * Supprime une region d'un itinéraire
+*/
+void remove_region(struct ItineraireFlame_t *way, Region *region); 
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Supprime une region d'un itinéraire}
+
+\begin{itemize}
+    \item @Pre: $way \ne NULL \land 0 \le delete\_regions \le 1$
+    \item @Post: $\slash$ 
+\end{itemize}
+
+\begin{lstlisting}
+/**
+    * @brief 
+    * L'ibère l'espace mémoire reservé pour un itinéraire
+*/
+void destroy_itineraireflame(ItineraireFlame *way, int delete_regions);
+\end{lstlisting}
+
+\pagebreak

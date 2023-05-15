@@ -5,3 +5,41 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Implémentations Récursives}\label{recursivite}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\quad Nous avons implémenté recursivement la fonction $in\_list(head, value)$, qui permet de vérifier
+si une value se trouve parmis les élements précédents d'un Noeud, et va retourner 1 dans le cas favorable
+sinon 0.
+
+\begin{itemize}
+    \item head: est le dernier Noeud d'une liste d'oublement chainée
+    \item value: est la valeur recherchée dans la liste
+\end{itemize}
+
+\subsection{Conception:}
+
+\begin{itemize}
+    \item Cas de base: ici deux cas sont possibles
+        \indent
+        \begin{itemize}
+            \item $head == NULL$ dans ce cas l'élément n'est pas dans la liste on retourne 0
+            \item $head \ne NULL \land head\to value == value$ dans ce cas on retourne 1
+        \end{itemize}
+    \item Cas non récursif: $head \ne NULL \land head\to value \ne value$
+\end{itemize}
+
+\subsection{Implémentation:}
+
+\begin{lstlisting}
+static unsigned int in_list(struct Node_t *last, Region *value)
+{
+    struct Node_t *head = last;
+    if (head != NULL)
+    {
+        if (head->value == value)
+            return 1;
+        return in_list(head->prev, value);
+    }
+    
+    return 0;
+}
+\end{lstlisting}
